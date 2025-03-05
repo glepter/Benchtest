@@ -1,4 +1,5 @@
 Documentation (English)
+
 WiFiManager Class
 
 The WiFiManager class is designed to manage WiFi connections on an ESP8266 using MicroPython. It can load and save WiFi network credentials, scan for available networks, connect to WiFi, and update the network credentials from a GitHub repository.
@@ -42,7 +43,127 @@ Methods
         Checks for an updated version of the WiFi network credentials file in a GitHub repository.
         If the local file is outdated, it downloads and replaces it with the most updated version from GitHub.
 
+
+
+MQTTManager Class
+
+The MQTTManager class is designed to manage MQTT connections on an ESP8266 using MicroPython. It supports different security configurations like QoS, SSL/TLS security, user/password authentication, and persistence.
+Methods
+
+    __init__(self, broker, port=1883, client_id='esp8266', username=None, password=None, ssl=False, ssl_params=None, qos=0, keepalive=60)
+        Initializes the MQTTManager instance.
+        Parameters:
+            broker: The address of the MQTT broker.
+            port: The port to connect to the MQTT broker (default is 1883).
+            client_id: The client ID to use for the connection.
+            username: The username for authentication (optional).
+            password: The password for authentication (optional).
+            ssl: Whether to use SSL/TLS for the connection (default is False).
+            ssl_params: SSL parameters (optional).
+            qos: The Quality of Service level (default is 0).
+            keepalive: The keepalive interval in seconds (default is 60).
+
+    connect(self)
+        Connects to the MQTT broker.
+
+    publish(self, topic, message)
+        Publishes a message to a specified topic.
+        Parameters:
+            topic: The topic to publish the message to.
+            message: The message to publish.
+
+    subscribe(self, topic)
+        Subscribes to a specified topic.
+        Parameters:
+            topic: The topic to subscribe to.
+
+    set_callback(self, callback)
+        Sets the callback function to handle incoming messages.
+        Parameters:
+            callback: The callback function.
+
+    check_msg(self)
+        Checks for incoming messages.
+
+    disconnect(self)
+        Disconnects from the MQTT broker.
+
+    subscribe_to_sys_topics(self)
+        Subscribes to the $SYS topics to monitor the broker status.
+
+    display_sys_status(self)
+        Displays the status of the broker by subscribing to the $SYS topics and printing the messages.
+
+Example of Use
+
+    Creating an Instance and Connecting to the Broker
+
+    from mqtt_manager import MQTTManager
+
+    def main():
+        broker = 'your_broker_address'
+        port = 8883  # Use 8883 for SSL/TLS, 1883 for non-SSL
+        client_id = 'esp8266'
+        username = 'your_username'
+        password = 'your_password'
+        ssl = True
+        ssl_params = {'cert_reqs': ussl.CERT_NONE}  # Adjust SSL parameters as needed
+        qos = 1
+        keepalive = 60
+
+        mqtt_manager = MQTTManager(
+            broker=broker,
+            port=port,
+            client_id=client_id,
+            username=username,
+            password=password,
+            ssl=ssl,
+            ssl_params=ssl_params,
+            qos=qos,
+            keepalive=keepalive
+        )
+
+        mqtt_manager.connect()
+
+        # Display broker status
+        mqtt_manager.display_sys_status()
+
+    if __name__ == '__main__':
+        main()
+
 Documentation (Spanish)
+
+Clase MQTTManager
+
+La clase MQTTManager está diseñada para gestionar conexiones MQTT en un ESP8266 usando MicroPython. Soporta diferentes configuraciones de seguridad como QoS, seguridad SSL/TLS, autenticación de usuario/contraseña y persistencia.
+Métodos
+
+    __init__(self, broker, port=1883, client_id='esp8266', username=None, password=None, ssl=False, ssl_params=None, qos=0, keepalive=60)
+        Inicializa la instancia de MQTTManager.
+        Parámetros:
+            broker: La dirección del broker MQTT.
+            port: El puerto para conectarse al broker MQTT (por defecto es 1883).
+            client_id: El ID del cliente para usar en la conexión.
+            username: El nombre de usuario para la autenticación (opcional).
+            password: La contraseña para la autenticación (opcional).
+            ssl: Si se debe usar SSL/TLS para la conexión (por defecto es False).
+            ssl_params: Parámetros SSL (opcional).
+            qos: El nivel de Calidad de Servicio (por defecto es 0).
+            keepalive: El intervalo de keepalive en segundos (por defecto es 60).
+
+    connect(self)
+        Conecta al broker MQTT.
+
+    publish(self, topic, message)
+        Publica un mensaje en un tema especificado.
+        Parámetros:
+            topic: El tema en el que publicar el mensaje.
+            message: El mensaje a publicar.
+
+    subscribe(self, topic)
+        Se suscribe a un tema especific
+
+
 Clase WiFiManager
 
 La clase WiFiManager está diseñada para gestionar conexiones WiFi en un ESP8266 usando MicroPython. Puede cargar y guardar credenciales de redes WiFi, escanear redes disponibles, conectarse a WiFi y actualizar las credenciales de red desde un repositorio de GitHub.
