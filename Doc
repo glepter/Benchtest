@@ -1,0 +1,87 @@
+Documentation (English)
+WiFiManager Class
+
+The WiFiManager class is designed to manage WiFi connections on an ESP8266 using MicroPython. It can load and save WiFi network credentials, scan for available networks, connect to WiFi, and update the network credentials from a GitHub repository.
+Methods
+
+    __init__(self, filename='wifi_networks.json', github_url='https://raw.githubusercontent.com/yourusername/yourrepo/main/wifi_networks.json')
+        Initializes the WiFiManager instance.
+        Parameters:
+            filename: The name of the file where WiFi network credentials are stored.
+            github_url: The URL of the GitHub file containing the updated WiFi network credentials.
+
+    load_wifi_networks(self)
+        Loads WiFi network credentials from the specified file.
+        Returns: A list of WiFi networks.
+
+    save_wifi_networks(self)
+        Saves the current WiFi network credentials to the specified file.
+
+    scan_networks(self)
+        Scans for available WiFi networks.
+        Returns: A list of available networks.
+
+    connect_to_wifi(self, ssid, password)
+        Attempts to connect to a WiFi network with the given SSID and password.
+        Parameters:
+            ssid: The SSID of the WiFi network.
+            password: The password of the WiFi network.
+        Returns: True if connected successfully, False otherwise.
+
+    manage_connections(self)
+        Manages the WiFi connections by attempting to connect to each network in the list.
+        Stops after three consecutive failures.
+
+    add_wifi_network(self, ssid, password)
+        Adds a new WiFi network to the list and saves it to the file.
+        Parameters:
+            ssid: The SSID of the new WiFi network.
+            password: The password of the new WiFi network.
+
+    update_wifi_networks_from_github(self)
+        Checks for an updated version of the WiFi network credentials file in a GitHub repository.
+        If the local file is outdated, it downloads and replaces it with the most updated version from GitHub.
+
+Documentation (Spanish)
+Clase WiFiManager
+
+La clase WiFiManager está diseñada para gestionar conexiones WiFi en un ESP8266 usando MicroPython. Puede cargar y guardar credenciales de redes WiFi, escanear redes disponibles, conectarse a WiFi y actualizar las credenciales de red desde un repositorio de GitHub.
+Métodos
+
+    __init__(self, filename='wifi_networks.json', github_url='https://raw.githubusercontent.com/yourusername/yourrepo/main/wifi_networks.json')
+        Inicializa la instancia de WiFiManager.
+        Parámetros:
+            filename: El nombre del archivo donde se almacenan las credenciales de las redes WiFi.
+            github_url: La URL del archivo de GitHub que contiene las credenciales actualizadas de las redes WiFi.
+
+    load_wifi_networks(self)
+        Carga las credenciales de las redes WiFi desde el archivo especificado.
+        Retorna: Una lista de redes WiFi.
+
+    save_wifi_networks(self)
+        Guarda las credenciales actuales de las redes WiFi en el archivo especificado.
+
+    scan_networks(self)
+        Escanea las redes WiFi disponibles.
+        Retorna: Una lista de redes disponibles.
+
+    connect_to_wifi(self, ssid, password)
+        Intenta conectarse a una red WiFi con el SSID y la contraseña dados.
+        Parámetros:
+            ssid: El SSID de la red WiFi.
+            password: La contraseña de la red WiFi.
+        Retorna: True si se conecta exitosamente, False de lo contrario.
+
+    manage_connections(self)
+        Gestiona las conexiones WiFi intentando conectarse a cada red en la lista.
+        Se detiene después de tres fallos consecutivos.
+
+    add_wifi_network(self, ssid, password)
+        Añade una nueva red WiFi a la lista y la guarda en el archivo.
+        Parámetros:
+            ssid: El SSID de la nueva red WiFi.
+            password: La contraseña de la nueva red WiFi.
+
+    update_wifi_networks_from_github(self)
+        Verifica si hay una versión actualizada del archivo de credenciales de redes WiFi en un repositorio de GitHub.
+        Si el archivo local está desactualizado, lo descarga y lo reemplaza con la versión más actualizada de GitHub.
